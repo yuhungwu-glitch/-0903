@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>口服藥物正確服用指南</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #f0f4f8;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .section-header {
+            border-bottom: 2px solid #e2e8f0;
+        }
+        .anchor-link {
+            transition: color 0.2s ease;
+        }
+        .anchor-link:hover {
+            color: #1a73e8;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: color 0.2s ease;
+        }
+        .close-button:hover {
+            color: #475569;
+        }
+        .question-container {
+            border: 2px dashed #cbd5e1;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            margin-top: 1.5rem;
+            background-color: #f8fafc;
+        }
+        .quiz-button {
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+        .quiz-button:hover {
+            transform: translateY(-2px);
+        }
+        .quiz-button.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .quiz-button.wrong {
+            background-color: #ef4444;
+            color: white;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-12">
+
+    <!-- Header Section -->
+    <header class="text-center mb-10">
+        <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-2">口服藥物正確服用指南</h1>
+        <p class="text-lg md:text-xl text-gray-600">服藥不只是吞下去這麼簡單！正確的用藥習慣，是守護健康的關鍵。</p>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav class="flex flex-wrap justify-center gap-4 mb-10">
+        <a href="#before-meds" class="anchor-link bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">服藥前</a>
+        <a href="#time-dose" class="anchor-link bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">時間與劑量</a>
+        <a href="#meds-tips" class="anchor-link bg-purple-500 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">服用注意事項</a>
+        <a href="#special-types" class="anchor-link bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">特殊劑型</a>
+        <a href="#missed-dose" class="anchor-link bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-full shadow-lg">忘記服藥</a>
+    </nav>
+
+    <!-- Main Content Sections -->
+    <main class="space-y-12 max-w-4xl mx-auto">
+
+        <!-- 區塊一：服藥前的關鍵提醒 -->
+        <section id="before-meds" class="card p-6 md:p-8">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 section-header pb-2">服藥前的關鍵提醒</h2>
+            <div class="space-y-4 text-gray-700">
+                <p><strong>仔細閱讀標籤：</strong>如果您不清楚藥袋上的說明，一定要找藥師或醫師解釋，完全瞭解後再服藥。</p>
+                <p><strong>勿自行增減藥量或停藥：</strong>未經醫師允許，請勿隨意增減藥量或停藥。</p>
+                <p><strong>勿與他人共用藥品：</strong>不可以將自己的藥品供其他病徵類似的人服用。</p>
+            </div>
+            <div class="question-container">
+                <p class="font-bold mb-2">💡 小測驗：如果您不清楚藥袋上的說明，最正確的做法是？</p>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <button class="quiz-button bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold py-2 px-4 rounded-lg flex-1" onclick="checkAnswer('before-meds', false)">猜測藥效並服藥</button>
+                    <button class="quiz-button bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold py-2 px-4 rounded-lg flex-1" onclick="checkAnswer('before-meds', true)">找藥師或醫師解釋</button>
+                    <button class="quiz-button bg-blue-100 hover:bg-blue-200 text-blue-800 font-semibold py-2 px-4 rounded-lg flex-1" onclick="checkAnswer('before-meds', false)">上網查詢，然後服藥</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊二：正確的服藥時間與劑量 -->
+        <section id="time-dose" class="card p-6 md:p-8">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 section-header pb-2">正確的服藥時間與劑量</h2>
+            <div class="space-y-4 text-gray-700">
+                <p>依藥師或醫師指示，在正確時間、正確期限內吃正確的藥，且劑量要正確。</p>
+                <ul class="list-disc pl-5 space-y-2 font-bold">
+                    <li><span class="cursor-pointer text-blue-600 hover:underline" onclick="showModal('空腹', '指飯前一小時或飯後二小時服用')">空腹</span></li>
+                    <li><span class="cursor-pointer text-blue-600 hover:underline" onclick="showModal('飯前', '指飯前半小時至一小時服用')">飯前</span></li>
+                    <li><span class="cursor-pointer text-blue-600 hover:underline" onclick="showModal('餐中', '指用餐中服用或與第一口飯一起吃')">餐中</span></li>
+                    <li><span class="cursor-pointer text-blue-600 hover:underline" onclick="showModal('飯後', '指飯後半小時至一小時服用')">飯後</span></li>
+                </ul>
+                <p>依藥師或醫師指示，記錄服藥前及服藥後的重要數據例如：血壓、脈搏、血糖等。</p>
+            </div>
+        </section>
+
+        <!-- 區塊三：服藥時的注意事項 -->
+        <section id="meds-tips" class="card p-6 md:p-8">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 section-header pb-2">服藥時的注意事項</h2>
+            <div class="space-y-4 text-gray-700">
+                <p><strong>配水建議：</strong>最好配合服用適量之溫開水約240cc至300cc，使藥物能順利吞入胃中。</p>
+                <p><strong>避免搭配：</strong>不要以咖啡、茶、果汁、可樂、牛奶配服藥品，這些飲品可能影響藥效或吸收。</p>
+                <p><strong>環境與提醒：</strong>不可在黑暗中摸索服藥。老年人、外籍傭人等需格外小心，避免用藥錯誤。</p>
+            </div>
+        </section>
+
+        <!-- 區塊四：特殊劑型的服用方法 -->
+        <section id="special-types" class="card p-6 md:p-8">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 section-header pb-2">特殊劑型的服用方法</h2>
+            <div class="space-y-4 text-gray-700">
+                <p><strong>藥錠：</strong>並非所有的藥品都能磨粉或剝半。長效或腸衣劑型藥品應整粒吞服，不可咬碎、壓碎或咀嚼。</p>
+                <p><strong>液體（糖漿）：</strong>最好用有刻度的量杯、量匙等準確器具取藥。懸浮液劑必須搖勻後使用。</p>
+                <p><strong>舌下錠：</strong>將藥錠放於舌下等其完全溶解，勿將其咬碎、吃喝任何東西或睡覺。</p>
+                <div class="question-container">
+                    <p class="font-bold mb-2">💡 互動問題：將藥丸磨成粉服用是安全且方便的嗎？</p>
+                    <div class="flex flex-col md:flex-row gap-4">
+                        <button class="quiz-button bg-red-100 hover:bg-red-200 text-red-800 font-semibold py-2 px-4 rounded-lg flex-1" onclick="showAnswer('wrong')">是的，這樣吞服更容易</button>
+                        <button class="quiz-button bg-green-100 hover:bg-green-200 text-green-800 font-semibold py-2 px-4 rounded-lg flex-1" onclick="showAnswer('correct')">不，這可能會影響藥物的緩釋效果</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 區塊五：忘記服藥的處理方式 -->
+        <section id="missed-dose" class="card p-6 md:p-8">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 section-header pb-2">忘記服藥的處理方式</h2>
+            <div class="space-y-4 text-gray-700">
+                <p><strong>症狀緩解藥物：</strong>例如止痛藥、止咳藥，忘了服藥沒有關係。</p>
+                <p><strong>治療性藥物：</strong>若在短時間內想起，則立即服用。如果已接近下次服藥時間，就不需補吃，不要服用雙倍的量。</p>
+                <p><strong>特殊藥物：</strong>如類固醇、避孕藥，忘記服藥請諮詢您的藥師。</p>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- Modal for Time Definitions -->
+    <div id="modal" class="modal">
+        <div class="modal-content card p-6 text-center">
+            <span class="close-button" onclick="hideModal()">&times;</span>
+            <h3 id="modal-title" class="text-2xl font-bold text-gray-800 mb-2"></h3>
+            <p id="modal-text" class="text-lg text-gray-600"></p>
+        </div>
+    </div>
+    
+    <!-- Modal for Quiz Answers -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content card p-6 text-center">
+            <span class="close-button" onclick="hideQuizModal()">&times;</span>
+            <p id="quizAnswerText" class="text-xl font-semibold mb-4"></p>
+            <p id="quizAnswerExplanation" class="text-gray-700"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        // Modal for time definitions
+        function showModal(title, text) {
+            const modal = document.getElementById('modal');
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-text').innerText = text;
+            modal.style.display = 'flex';
+        }
+
+        function hideModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal');
+            const quizModal = document.getElementById('quizModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+            if (event.target == quizModal) {
+                quizModal.style.display = "none";
+            }
+        }
+
+        // Quiz for 'before-meds' section
+        function checkAnswer(sectionId, isCorrect) {
+            const buttons = document.querySelector(`#${sectionId} .question-container`).querySelectorAll('button');
+            buttons.forEach(button => {
+                button.disabled = true;
+                if (isCorrect && button.innerText.includes('藥師')) {
+                    button.classList.add('correct');
+                } else if (!isCorrect && !button.innerText.includes('藥師')) {
+                    button.classList.add('wrong');
+                }
+            });
+
+            const quizAnswerText = document.getElementById('quizAnswerText');
+            const quizAnswerExplanation = document.getElementById('quizAnswerExplanation');
+            if (isCorrect) {
+                quizAnswerText.innerText = '✅ 正確！';
+                quizAnswerExplanation.innerText = '如果有任何不清楚的地方，直接諮詢專業人士是最安全的做法。';
+            } else {
+                quizAnswerText.innerText = '❌ 錯誤！';
+                quizAnswerExplanation.innerText = '藥品有其專業性，切勿自行猜測或僅憑網路資訊，以免造成危險。';
+            }
+            document.getElementById('quizModal').style.display = 'flex';
+        }
+
+        // Quiz for 'special-types' section
+        function showAnswer(type) {
+            const quizAnswerText = document.getElementById('quizAnswerText');
+            const quizAnswerExplanation = document.getElementById('quizAnswerExplanation');
+            if (type === 'correct') {
+                quizAnswerText.innerText = '✅ 正確！';
+                quizAnswerExplanation.innerText = '長效或腸衣劑型的藥物磨粉後會破壞其特殊設計，可能導致藥效過快釋放，造成危險。';
+            } else {
+                quizAnswerText.innerText = '❌ 錯誤！';
+                quizAnswerExplanation.innerText = '並非所有藥品都適合磨粉或剝半。如果有吞嚥困難，應告知醫師，讓醫師開立適合的劑型。';
+            }
+            document.getElementById('quizModal').style.display = 'flex';
+        }
+        
+        function hideQuizModal() {
+            document.getElementById('quizModal').style.display = 'none';
+            // Reset buttons for 'before-meds' quiz
+            const buttons = document.querySelector(`#before-meds .question-container`).querySelectorAll('button');
+            buttons.forEach(button => {
+                button.disabled = false;
+                button.classList.remove('correct', 'wrong');
+            });
+        }
+    </script>
+
+</body>
+</html>
